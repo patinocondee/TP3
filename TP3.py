@@ -13,6 +13,7 @@ counter = 0
 chef = 0
 points_de_vie = 20
 victoires_consecutifs = 0
+force_adversaire = 0
 
 
 def regles():
@@ -32,25 +33,23 @@ def combat():
     """
     La fonction qui define le deroulement du combat
     """
-    global chef, counter, points_de_vie, victoires_consecutifs
+    global chef, counter, points_de_vie, victoires_consecutifs,force_adversaire
     choice = 0
-    force_adversaire = 0
-
     dice = random.randint(1, 5)
     print(f"Vous attaquez le monstre à {force_adversaire} points de vie avec une force de...")
     print(f"{dice} !!!")
     if dice > force_adversaire:
         print("Reussite!")
-        counter += 1
-        chef += 1
-        victoires_consecutifs += 1
-        points_de_vie += force_adversaire
+        counter = counter + 1
+        chef = chef + 1
+        victoires_consecutifs = victoires_consecutifs + 1
+        points_de_vie = points_de_vie + force_adversaire
         print(f"Vous avez maintenant {points_de_vie} points de vie ")
         print(f"Vous avez {victoires_consecutifs} victoires consecutives")
 
     else:
         print("Defaite..")
-        points_de_vie -= force_adversaire
+        points_de_vie = points_de_vie - force_adversaire
         print(f"Vous avez maintenant {points_de_vie} points de vie ")
         victoires_cons = 0
 
@@ -60,9 +59,9 @@ def jeu():
 
     fonction qui define le jeu et le deroulement du programme dependant des choix faits
     """
-    global chef, points_de_vie, counter, victoires_consecutifs
+    global chef, points_de_vie, counter, victoires_consecutifs,force_adversaire
 
-    choice = -1
+    choice = 0
     while points_de_vie > 0:
 
         if chef == 3:
@@ -78,15 +77,15 @@ def jeu():
                 print(f"{dice} !!!")
                 if dice > force_chef:
                     print("Reussite!")
-                    counter += 1
-                    victoires_consecutifs += 1
+                    counter = counter+ 1
+                    victoires_consecutifs = victoires_consecutifs + 1
                     boss = 0
-                    points_de_vie += force_chef
+                    points_de_vie = points_de_vie + force_chef
                     print(f"Vous avez maintenant {points_de_vie} points de vie ")
                     print(f"Vous avez {victoires_consecutifs} victoires consecutives")
                 else:
                     print("Le BOSS vous abat..")
-                    points_de_vie -= force_chef
+                    points_de_vie = points_de_vie - force_chef
                     print(f"Vous avez maintenant {points_de_vie} HP")
         else:
             force_adversaire = random.randint(1, 5)
@@ -102,14 +101,14 @@ def jeu():
         if choice == 1:
             combat()
         elif choice == 2:
-            points_de_vie -= 1
+            points_de_vie = points_de_vie - 1
         elif choice == 3:
             regles()
         elif choice == 4:
             print("Au revoir")
             exit()
 
-if points_de_vie <= 0:
+
     print("VOUS ETES MORT")
     print(f"Vous avez battu {counter} adversaires")
     exit()
