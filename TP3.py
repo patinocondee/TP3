@@ -65,6 +65,7 @@ def jeu():
     while points_de_vie > 0:
 
         if chef == 3:
+            chef = 0
             force_chef = random.randint(3, 5)
             print(
                 f"Vous confrontez un chef des monstres  ! sa force est de {force_chef} HP    Il vous reste {points_de_vie} points de vie .")
